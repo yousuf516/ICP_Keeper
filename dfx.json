@@ -1,0 +1,28 @@
+{
+  "canisters": {
+    "ICP_Keeper_backend": {
+      "main": "src/ICP_Keeper_backend/main.mo",
+      "type": "motoko"
+    },
+    "ICP_Keeper_frontend": {
+      "dependencies": [
+        "ICP_Keeper_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/ICP_Keeper_frontend/src/index.html"
+      },
+      "source": [
+        "src/ICP_Keeper_frontend/assets",
+        "dist/ICP_Keeper_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "version": 1
+}
