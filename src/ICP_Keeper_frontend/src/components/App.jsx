@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
+import { ICP_Keeper_backend } from "../../../declarations/ICP_Keeper_backend";
 
 function App() {
   const [notes, setNotes] = useState([]);
 
   function addNote(newNote) {
     setNotes(prevNotes => {
-      return [...prevNotes, newNote];
+      ICP_Keeper_backend.createNote(newNote.title, newNote.content);
+      return [newNote, ...prevNotes];
     });
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    const notesArray = await ICP_Keeper_backend.readNotes();
+    setNotes(notesArray);
   }
 
   function deleteNote(id) {
